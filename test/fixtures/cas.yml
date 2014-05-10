@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  ca_password: MyString
+  ca_param: MyString
+  hostname: MyString
+  domain_name: MyString
+  dn_c: MyString
+  dn_st: MyString
+  dn_l: MyString
+  dn_o: MyString
+  dn_ou: MyString
+
+two:
+  user_id: 1
+  ca_password: MyString
+  ca_param: MyString
+  hostname: MyString
+  domain_name: MyString
+  dn_c: MyString
+  dn_st: MyString
+  dn_l: MyString
+  dn_o: MyString
+  dn_ou: MyString
