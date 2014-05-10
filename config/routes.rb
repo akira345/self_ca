@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'cas/create'
+
   get 'home/index'
 
  devise_for :users, :controllers => {
