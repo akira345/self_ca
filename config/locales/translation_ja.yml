@@ -1,15 +1,15 @@
 ja:
   activerecord:
     models:
-      ca: ca  #g
+      ca: 認証局データ
 
     attributes:
       ca:
-        ca_password: ca_password  #g
-        dn_c: dn_c  #g
-        dn_l: dn_l  #g
-        dn_o: dn_o  #g
-        dn_ou: dn_ou  #g
-        dn_st: dn_st  #g
-        domain_name: domain_name  #g
-        hostname: hostname  #g
+        ca_password: CAのパスワード
+        dn_c: 国コード
+        dn_l: 市区郡
+        dn_o: 組織名
+        dn_ou: 部署名
+        dn_st: 都道府県
+        domain_name: ドメイン名
+        hostname: ホスト名
