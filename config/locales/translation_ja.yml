@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    models:
+      ca: ca  #g
+
+    attributes:
+      ca:
+        ca_password: ca_password  #g
+        dn_c: dn_c  #g
+        dn_l: dn_l  #g
+        dn_o: dn_o  #g
+        dn_ou: dn_ou  #g
+        dn_st: dn_st  #g
+        domain_name: domain_name  #g
+        hostname: hostname  #g

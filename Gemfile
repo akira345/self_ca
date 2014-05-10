@@ -40,3 +40,6 @@ gem 'spring',        group: :development
 
 # Use devise
 gem 'devise'
+
+# Use i18n
+gem 'i18n_generators'
