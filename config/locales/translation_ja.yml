@@ -6,7 +6,7 @@ ja:
     attributes:
       ca:
         ca_password: CAのパスワード
-        dn_c: 国コード
+        country: 国コード
         dn_l: 市区郡
         dn_o: 組織名
         dn_ou: 部署名

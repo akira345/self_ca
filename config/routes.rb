@@ -1,12 +1,20 @@
 Rails.application.routes.draw do
+  get 'csrs/index'
+
+  get 'cas/index'
   get 'cas/create'
+  get 'cas/download'
 
   get 'home/index'
 
- devise_for :users, :controllers => {
+  resources :cas
+  resources :csrs
+
+  devise_for :users, :controllers => {
     :sessions => 'users/sessions',
     :registrations => 'users/registrations'
-  }
+    }
+    get 'cas',:to=>'cas#index',:as=>:user_root
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

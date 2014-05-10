@@ -47,11 +47,16 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="#">SelfCa</a>
+
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+            <% if user_signed_in? %>
+              <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
+              <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+            <% else %>
+              <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
+              <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
+            <% end %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -61,24 +66,24 @@
     <div class="container">
         <div class="row">
           <div class="span9">
+</br>
             <%= bootstrap_flash %>
+            </br>
+
+
+            <% if notice %>
+              <p class="alert alert-notice"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+              <p class="alert alert-error"><%= alert %></p>
+            <% end %>
+
             <%= yield %>
           </div>
-          <div class="span3">
-            <div class="well sidebar-nav">
-              <h3>Sidebar</h3>
-              <ul class="nav nav-list">
-                <li class="nav-header">Sidebar</li>
-                <li><%= link_to "Link1", "/path1"  %></li>
-                <li><%= link_to "Link2", "/path2"  %></li>
-                <li><%= link_to "Link3", "/path3"  %></li>
-              </ul>
-            </div><!--/.well -->
-          </div><!--/span-->
         </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2014</p>
+        <p>&copy; Akira345 2014</p>
       </footer>
 
     </div> <!-- /container -->

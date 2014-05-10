@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20140510142847) do
     t.string   "ca_password", limit: 16, null: false
     t.string   "hostname",               null: false
     t.string   "domain_name",            null: false
-    t.string   "dn_c",                   null: false
+    t.string   "country",                null: false
     t.string   "dn_st",                  null: false
     t.string   "dn_l",                   null: false
     t.string   "dn_o",                   null: false

@@ -51,3 +51,5 @@ gem 'execjs'
 
 # Use simple_form
 gem 'simple_form'
+
+gem 'country_select'

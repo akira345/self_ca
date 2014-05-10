@@ -1,2 +1,17 @@
-<h1>Cas#create</h1>
-<p>Find me in app/views/cas/create.html.erb</p>
+</br>
+</br>
+<h1>自局認証局の情報を入力</h1>
+
+<%= simple_form_for @ca, :html => {:class => 'form-horizontal'}  do |f| %>
+<%=f.input :hostname, :input_html => {:class => 'input-medium'} %>
+<%=f.input :domain_name, :input_html => {:class => 'input-medium'} %>
+<%=f.input :country, iso_codes: true ,:collection => [['Japan', :JP]],:selected => [:JP]%>
+<%=f.input :dn_st, :input_html => {:class => 'input-medium'} %>
+<%=f.input :dn_l, :input_html => {:class => 'input-medium'} %>
+<%=f.input :dn_o, :input_html => {:class => 'input-medium'} %>
+<%=f.input :dn_ou, :input_html => {:class => 'input-medium'} %>
+ <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+
+  </div>
+<% end %>

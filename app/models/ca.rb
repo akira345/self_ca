@@ -1,3 +1,10 @@
 class Ca < ActiveRecord::Base
- belongs_to :user
+  validates :hostname,:presence => true 
+  validates :domain_name,:presence=>true
+  validates :country,:presence=>true
+  validates :dn_st,:presence=>true
+  validates :dn_l,:presence=>true
+  validates :dn_o,:presence=>true
+
+  belongs_to :user
 end

@@ -1,7 +1,7 @@
 require 'openssl'
 require 'fileutils'
 
-class MakeCert
+class Makecert
   def initialize(ca_config)
     @ca_config = ca_config
     create_ca
