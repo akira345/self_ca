@@ -42,7 +42,7 @@ gem 'spring',        group: :development
 gem 'devise'
 
 # Use i18n
-gem 'i18n_generators'
+#gem 'i18n_generators'
 
 # Use Twitter-bootstrap
 gem 'less-rails'
