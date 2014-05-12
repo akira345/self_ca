@@ -66,8 +66,8 @@ class Makecert
 #証明書を作成
   def create_cert(cert_config)
     #すでに作成済みだったら抜ける(add)
-    file_name = cert_config[:hostname] || cert_config[:user]
-    dest = "#{RAILS_ROOT}/cert/" + file_name
+    file_name = cert_config[:hostname]
+    dest = cert_config[:cert_dir]
 #require 'pp'
 #pp dest
     return if File.exists? dest
@@ -79,8 +79,8 @@ class Makecert
 #鍵を作成
   def create_key(cert_config)
     passwd_cb = nil
-    file_name = cert_config[:hostname] || cert_config[:user]
-    dest = "#{RAILS_ROOT}/cert/" + file_name
+    file_name = cert_config[:hostname]
+    dest = cert_config[:cert_dir] + file_name
     keypair_file = File.join dest, (file_name + "_keypair.pem")
     FileUtils.mkdir_p dest
     FileUtils.chmod( 0700,dest)
@@ -107,18 +107,15 @@ class Makecert
 #CSRファイル作成
   def create_csr(cert_config, keypair_file = nil)
     keypair = nil
-    file_name = cert_config[:hostname] || cert_config[:user]
-    dest = "#{RAILS_ROOT}/cert/" + file_name
+    file_name = cert_config[:hostname]
+    dest = cert_config[:cert_dir] + file_name
     csr_file = File.join dest, "csr_#{file_name}.pem"
 
-    name = cert_config[:name].dup  ####ここをcert_configにする。cert_configにも国情報を渡す。 
+    name = cert_config[:name].dup
     case cert_config[:type]
     when 'server' then
       name << ['OU', 'CA']
       name << ['CN', cert_config[:hostname]]
-    when 'client' then
-      name << ['CN', cert_config[:user]]
-      name << ['emailAddress', cert_config[:email]]
     end
     name = OpenSSL::X509::Name.new name
 
@@ -201,21 +198,10 @@ class Makecert
     when "ca" then
       basic_constraint = "CA:TRUE"
       key_usage << "cRLSign" << "keyCertSign"
-    when "terminalsubca" then
-      basic_constraint = "CA:TRUE,pathlen:0"
-      key_usage << "cRLSign" << "keyCertSign"
     when "server" then
       basic_constraint = "CA:FALSE"
       key_usage << "digitalSignature" << "keyEncipherment"
       ext_key_usage << "serverAuth"
-    when "ocsp" then
-      basic_constraint = "CA:FALSE"
-      key_usage << "nonRepudiation" << "digitalSignature"
-      ext_key_usage << "serverAuth" << "OCSPSigning"
-    when "client" then
-      basic_constraint = "CA:FALSE"
-      key_usage << "nonRepudiation" << "digitalSignature" << "keyEncipherment"
-      ext_key_usage << "clientAuth" << "emailProtection"
     else
       raise "unknonw cert type \"#{cert_config[:type]}\""
     end
@@ -239,15 +225,6 @@ class Makecert
       ex << ef.create_extension("extendedKeyUsage", ext_key_usage.join(","))
     end
 
-    if @ca_config[:cdp_location] then
-      ex << ef.create_extension("crlDistributionPoints",
-                                @ca_config[:cdp_location])
-    end
-
-    if @ca_config[:ocsp_location] then
-      ex << ef.create_extension("authorityInfoAccess",
-                                "OCSP;" << @ca_config[:ocsp_location])
-    end
     cert.extensions = ex
 #####署名
     cert.sign ca_keypair, OpenSSL::Digest::SHA1.new
@@ -259,8 +236,8 @@ class Makecert
     end
 
     # Write cert
-    file_name = cert_config[:hostname] || cert_config[:user]
-    dest = "#{RAILS_ROOT}/cert/" + file_name
+    file_name = cert_config[:hostname]
+    dest = @ca_config[:new_certs_dir] + "/"+file_name
     cert_file = File.join dest, "cert_#{file_name}.pem"
     Rails.logger.debug "Writing cert to #{cert_file}" 
     File.open cert_file, "w", 0644 do |f|
