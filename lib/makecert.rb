@@ -1,14 +1,67 @@
 require 'openssl'
 require 'fileutils'
-
+##
+# QuickCert allows you to quickly and easily create SSL
+# certificates.  It uses a simple configuration file to generate
+# self-signed client and server certificates.
+#
+# QuickCert is a compilation of NAKAMURA Hiroshi's post to
+# ruby-talk number 89917:
+#
+# http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/89917
+#
+# the example scripts referenced in the above post, and
+# gen_csr.rb from Ruby's OpenSSL examples.
+#
+# A simple QuickCert configuration file looks like:
+#
+#   full_hostname = `hostname`.strip
+#   domainname = full_hostname.split('.')[1..-1].join('.')
+#   hostname = full_hostname.split('.')[0]
+#
+#   CA[:hostname] = hostname
+#   CA[:domainname] = domainname
+#   CA[:CA_dir] = File.join Dir.pwd, "CA"
+#   CA[:password] = '1234'
+#   
+#   CERTS << {
+#     :type => 'server',
+#     :hostname => 'uriel',
+#     :password => '5678',
+#   }
+#   
+#   CERTS << {
+#     :type => 'client',
+#     :user => 'drbrain',
+#     :email => 'drbrain@segment7.net',
+#   }
+#
+# This configuration will create a Certificate Authority in a
+# 'CA' directory in the current directory, a server certificate
+# with password '5678' for the server 'uriel' in a directory
+# named 'uriel', and a client certificate for drbrain in the
+# directory 'drbrain' with no password.
+#
+# There are additional SSL knobs you can tweak in the
+# qc_defaults.rb file.
+#
+# To generate the certificates, simply create a qc_config file
+# where you want the certificate directories to be created, then
+# run QuickCert.
+#
+# QuickCert's homepage is:
+# http://segment7.net/projects/ruby/QuickCert/
+# 
+# QuickCertを元に作成
+#
 class Makecert
   def initialize(ca_config)
     @ca_config = ca_config
     create_ca
   end
-#自己認証局を作成
+    #自己認証局を作成
   def create_ca
-    #すでに作成済みだったら抜ける
+      #すでに作成済みだったら抜ける
     return if File.exists? @ca_config[:CA_dir]
    #CA作成用ディレクトリを作成
     FileUtils.mkdir_p @ca_config[:CA_dir]
@@ -25,6 +78,7 @@ class Makecert
     keypair = OpenSSL::PKey::RSA.new @ca_config[:ca_rsa_key_length]
    #CA証明書を作成
     cert = OpenSSL::X509::Certificate.new
+    #CNに"CA"をセット
     name = @ca_config[:name].dup << ['CN', 'CA']
     cert.subject = cert.issuer = OpenSSL::X509::Name.new(name)
     cert.not_before = Time.now
@@ -37,11 +91,16 @@ class Makecert
     ef.subject_certificate = cert
     ef.issuer_certificate = cert
     cert.extensions = [
+    #基本制約の認証局フラグ
       ef.create_extension("basicConstraints","CA:TRUE", true),
+   #コメント
       ef.create_extension("nsComment","Ruby/OpenSSL Generated Certificate"),
+   #サブジェクト鍵識別子   
       ef.create_extension("subjectKeyIdentifier", "hash"),
+   #鍵用途
       ef.create_extension("keyUsage", "cRLSign,keyCertSign", true),
           ]
+   #機関鍵識別子
     cert.add_extension ef.create_extension("authorityKeyIdentifier",
                                            "keyid:always,issuer:always")
 #署名
@@ -65,15 +124,16 @@ class Makecert
   end
 #証明書を作成
   def create_cert(cert_config)
-    #すでに作成済みだったら抜ける(add)
+    #すでに作成済みだったら抜ける
     file_name = cert_config[:hostname]
-    dest = cert_config[:cert_dir]
-#require 'pp'
-#pp dest
+    dest = cert_config[:cert_dir] + file_name
+
     return if File.exists? dest
-  #add
+Rails.logger.debug "キーペア作成"
     cert_keypair = create_key(cert_config)
+Rails.logger.debug "CSR作成"
     cert_csr = create_csr(cert_config, cert_keypair)
+Rails.logger.debug "証明書作成"
     sign_cert(cert_config, cert_keypair, cert_csr)
   end
 #鍵を作成
@@ -156,9 +216,10 @@ class Makecert
       raise "Key length too long"
     end
 #DNチェック
-    if csr.subject.to_a[0, cert_config[:name].size] != cert_config[:name] then
-      raise "DN does not match"
-    end
+#自己証明なのでチェックしない。
+#    if csr.subject.to_a[0, cert_config[:name].size] != cert_config[:name] then
+#      raise "DN does not match"
+#    end
 
     # Only checks signature here.  You must verify CSR according to your
     # CP/CPS.
@@ -211,10 +272,10 @@ class Makecert
     ef.issuer_certificate = ca
     ex = []
     ex << ef.create_extension("basicConstraints", basic_constraint, true)
-    ex << ef.create_extension("nsComment",
-                              "Ruby/OpenSSL Generated Certificate")
+    #Netscape用のコメントらしい。今は未使用？？
+    #ex << ef.create_extension("nsComment",
+    #                          "Ruby/OpenSSL Generated Certificate")
     ex << ef.create_extension("subjectKeyIdentifier", "hash")
-    #ex << ef.create_extension("nsCertType", "client,email")
     unless key_usage.empty? then
       ex << ef.create_extension("keyUsage", key_usage.join(","))
     end
@@ -228,7 +289,7 @@ class Makecert
     cert.extensions = ex
 #####署名
     cert.sign ca_keypair, OpenSSL::Digest::SHA1.new
-
+#CA側にバックアップ
     backup_cert_file = @ca_config[:new_certs_dir] + "/cert_#{cert.serial}.pem"
     Rails.logger.debug "Writing backup cert to #{backup_cert_file}" 
     File.open backup_cert_file, "w", 0644 do |f|
@@ -237,7 +298,7 @@ class Makecert
 
     # Write cert
     file_name = cert_config[:hostname]
-    dest = @ca_config[:new_certs_dir] + "/"+file_name
+    dest = cert_config[:cert_dir] + "/"+file_name
     cert_file = File.join dest, "cert_#{file_name}.pem"
     Rails.logger.debug "Writing cert to #{cert_file}" 
     File.open cert_file, "w", 0644 do |f|
