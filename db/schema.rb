@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20140511061100) do
     t.datetime "updated_at"
   end
 
+  add_index "csrs", ["hostname"], name: "index_csrs_on_hostname", unique: true
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
