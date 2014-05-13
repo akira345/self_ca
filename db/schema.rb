@@ -11,17 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140510142847) do
+ActiveRecord::Schema.define(version: 20140511061100) do
 
   create_table "cas", force: true do |t|
     t.integer  "user_id"
     t.string   "ca_password", limit: 16, null: false
     t.string   "hostname",               null: false
-    t.string   "domain_name",            null: false
     t.string   "country",                null: false
     t.string   "dn_st",                  null: false
     t.string   "dn_l",                   null: false
     t.string   "dn_o",                   null: false
+    t.string   "dn_ou"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "csrs", force: true do |t|
+    t.integer  "user_id"
+    t.string   "hostname",   null: false
+    t.string   "country",    null: false
+    t.string   "dn_st",      null: false
+    t.string   "dn_l",       null: false
+    t.string   "dn_o",       null: false
     t.string   "dn_ou"
     t.datetime "created_at"
     t.datetime "updated_at"

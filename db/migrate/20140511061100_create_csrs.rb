@@ -1,8 +1,7 @@
-class CreateCas < ActiveRecord::Migration
+class CreateCsrs < ActiveRecord::Migration
   def change
-    create_table :cas do |t|
-      t.integer :user_id 
-      t.string :ca_password, :limit=>16, :null=>false
+    create_table :csrs do |t|
+      t.integer :user_id
       t.string :hostname, :null=>false
       t.string :country, :null=>false
       t.string :dn_st, :null=>false

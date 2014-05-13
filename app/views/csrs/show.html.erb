@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>ホスト名:</strong>
+  <%= @csr.hostname %>
+</p>
+
+<p>
+  <strong>国コード:</strong>
+  <%= @csr.country %>
+</p>
+
+<p>
+  <strong>都道府県:</strong>
+  <%= @csr.dn_st %>
+</p>
+
+<p>
+  <strong>市区郡:</strong>
+  <%= @csr.dn_l %>
+</p>
+
+<p>
+  <strong>組織名:</strong>
+  <%= @csr.dn_o %>
+</p>
+
+<p>
+  <strong>部署名:</strong>
+  <%= @csr.dn_ou %>
+</p>
+
+<%= link_to '編集', edit_csr_path(@csr) %> |
+<%= link_to '戻る', csrs_path %>

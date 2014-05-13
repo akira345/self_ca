@@ -53,10 +53,15 @@
             <% if user_signed_in? %>
               <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
               <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+            <% filepath = Rails.root.to_s+"/data/#{current_user.id}/CA/cacert.pem"
+               if File.exists? filepath %>
+            <li><%= link_to "CA証明書DL", :controller => "cas", :action => "download" %></li>
+            <% end %>
             <% else %>
               <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
               <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
             <% end %>
+
             </ul>
           </div><!--/.nav-collapse -->
         </div>

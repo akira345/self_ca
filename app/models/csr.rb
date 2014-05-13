@@ -1,4 +1,4 @@
-class Ca < ActiveRecord::Base
+class Csr < ActiveRecord::Base
   validates :hostname,:presence => true 
   validates :country,:presence=>true
   validates :dn_st,:presence=>true

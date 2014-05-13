@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'csrs/index'
-
+  get 'csrs/download'
   get 'cas/index'
   get 'cas/create'
   get 'cas/download'

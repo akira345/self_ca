@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  hostname: MyString
+  cert_password: MyString
+  cert_rsa_key_length: 1
+  country: MyString
+  dn_st: MyString
+  dn_l: MyString
+  dn_o: MyString
+  dn_ou: MyString
+
+two:
+  user_id: 1
+  hostname: MyString
+  cert_password: MyString
+  cert_rsa_key_length: 1
+  country: MyString
+  dn_st: MyString
+  dn_l: MyString
+  dn_o: MyString
+  dn_ou: MyString

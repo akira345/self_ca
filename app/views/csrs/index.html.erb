@@ -1,4 +1,29 @@
-<h1>Csrs#index</h1>
-<p>Find me in app/views/csrs/index.html.erb</p>
+<h1>証明書リスト</h1>
 
-<%= link_to "CA証明書DL", :controller => "cas", :action => "download" %>
+<table>
+  <thead>
+    <tr>
+      <th>ホスト名</th>
+      <th>公開鍵</th>
+      <th>秘密鍵</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @csrs.each do |csr| %>
+      <tr>
+        <td><%= csr.hostname %></td>
+        <td><%= link_to "公開鍵DL", :controller => "csrs", :action => "download",:kind =>"public" %>
+        <td><%= link_to "秘密鍵DL", :controller => "csrs", :action => "download",:kind =>"secret" %>
+        <td><%= link_to '詳細', csr %></td>
+        <td><%= link_to '編集', edit_csr_path(csr) %></td>
+        <td><%= link_to '削除', csr, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '証明書追加', new_csr_path %>
