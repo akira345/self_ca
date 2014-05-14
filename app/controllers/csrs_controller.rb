@@ -39,13 +39,13 @@ class CsrsController < ApplicationController
       logger.debug("ファイルあり")
       stat = File::stat(filepath)
       logger.debug(stat.size)
-      send_file(filepath, :filename => 'cacertt.pem',:length => stat.size,:status=>201,:type=>'application/x-pem-file')
-      #send_file(filepath)
+      #binding.pry
+      send_file(filepath, :filename => filename,:length => stat.size,:status=>201,:type=>'application/x-pem-file')
     else
       logger.debug("ファイルなし")
     end
-          #レスポンス201を返す
-    head:created
+          #戻る
+    #redirect_to( :back )
   end
 
   # POST /csrs

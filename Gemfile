@@ -53,3 +53,5 @@ gem 'execjs'
 gem 'simple_form'
 
 gem 'country_select'
+gem 'pry'
+gem 'pry-nav'

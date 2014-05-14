@@ -24,8 +24,8 @@ class CasController < ApplicationController
     else
       logger.debug("ファイルなし")
     end
-          #レスポンス201を返す
-    head:created
+          #戻る
+    #redirect_to( :back )
   end
 
   def create
