@@ -2,14 +2,12 @@ class CsrsController < ApplicationController
   before_action :set_csr, only: [:show, :edit, :update, :destroy]
 
   # GET /csrs
-  # GET /csrs.json
   def index
           #一覧表示
     @csrs = Csr.where(:user_id =>current_user.id)
   end
 
   # GET /csrs/1
-  # GET /csrs/1.json
   def show
       #詳細表示
     #TODO まだ未実装
@@ -51,7 +49,6 @@ class CsrsController < ApplicationController
   end
 
   # POST /csrs
-  # POST /csrs.json
   def create
     @csr = Csr.new(csr_params)
     @csr.user_id = current_user.id
@@ -108,16 +105,13 @@ class CsrsController < ApplicationController
         cert.create_cert(cert_param)
 
         format.html { redirect_to @csr, notice: '証明書を作成しました。.' }
-        format.json { render :show, status: :created, location: @csr }
       else
         format.html { render :new }
-        format.json { render json: @csr.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /csrs/1
-  # PATCH/PUT /csrs/1.json
   def update
     #TODO 未実装
 #    respond_to do |format|
@@ -184,7 +178,6 @@ class CsrsController < ApplicationController
   end
 
   # DELETE /csrs/1
-  # DELETE /csrs/1.json
   def destroy
   #TODO レコード条件追加。CAとの整合性をどうする？ちゃんと失効処理追加する？
     @csr.destroy
@@ -195,7 +188,6 @@ class CsrsController < ApplicationController
     end
     respond_to do |format|
       format.html { redirect_to csrs_url, notice: 'Csr was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
