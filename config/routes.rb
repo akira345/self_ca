@@ -1,14 +1,22 @@
 Rails.application.routes.draw do
-  get 'csrs/index'
+#  get 'csrs/index'
   get 'csrs/download'
-  get 'cas/index'
-  get 'cas/create'
+#  get 'csrs/show'
+#  get 'csrs/edit'
+  
+#  get 'cas/index'
+#  get 'cas/create'
   get 'cas/download'
 
   get 'home/index'
 
+#resourcesで書くと、基本的なルーティング(index,create,new,edit,show,update,destroy)とヘルパーを自動生成してくれる
   resources :cas
-  resources :csrs
+  resources :csrs do
+    member do
+      get :download
+    end
+  end
 
   devise_for :users, :controllers => {
     :sessions => 'users/sessions',

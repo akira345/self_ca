@@ -5,7 +5,7 @@ class CasController < ApplicationController
     logger.debug(current_user.id)
           #すでに認証局作成済みか？
     if Ca.exists?(user_id: current_user.id)
-          redirect_to csrs_index_path
+          redirect_to :controller=>'csrs',:action => 'index'
     else
         #認証局作成
       @ca=Ca.new
@@ -74,7 +74,7 @@ class CasController < ApplicationController
       ca = Makecert.new(ca_param)
       logger.debug("ca")
   
-      redirect_to csrs_index_path
+      redirect_to :controller => "csrs", :action=>"index"
     else
       logger.debug("NG")
       render 'create'
