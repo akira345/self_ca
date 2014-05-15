@@ -1,9 +1,11 @@
 <h1>証明書リスト</h1>
 
-<table>
+<table border="1">
   <thead>
     <tr>
       <th>ホスト名</th>
+      <th>作成日</th>
+      <th>有効期限</th>
       <th>公開鍵</th>
       <th>秘密鍵</th>
       <th colspan="3"></th>
@@ -14,6 +16,9 @@
     <% @csrs.each do |csr| %>
       <tr>
         <td><%= csr.hostname %></td>
+        <td><%= csr.updated_at.strftime("%Y/%m/%d") %></td>
+        <td><%= (csr.updated_at + 1.years).strftime("%Y/%m/%d") %></td>
+        
         <td><%= link_to "公開鍵DL", download_csr_path(csr,:kind =>"public") %>
         <td><%= link_to "秘密鍵DL", download_csr_path(csr,:kind =>"secret") %>
         <td><%= link_to '詳細', csr %></td>
