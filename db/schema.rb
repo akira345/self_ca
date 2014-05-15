@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20140511061100) do
     t.datetime "updated_at"
   end
 
+  add_index "cas", ["hostname", "user_id"], name: "index_cas_on_hostname_and_user_id", unique: true
+
   create_table "csrs", force: true do |t|
     t.integer  "user_id"
     t.string   "hostname",   null: false
@@ -38,7 +40,7 @@ ActiveRecord::Schema.define(version: 20140511061100) do
     t.datetime "updated_at"
   end
 
-  add_index "csrs", ["hostname"], name: "index_csrs_on_hostname", unique: true
+  add_index "csrs", ["hostname", "user_id"], name: "index_csrs_on_hostname_and_user_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

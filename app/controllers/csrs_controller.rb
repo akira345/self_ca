@@ -114,13 +114,16 @@ class CsrsController < ApplicationController
   def update
     #TODO 未実装
     logger.debug "EDIT!!"
+    #変更前のホスト名を取得
+    before_csr = Csr.select("hostname").where(["id = ? and user_id = ?", params[:id], current_user.id]).first
     respond_to do |format|
       if @csr.update(csr_params)
               #一旦削除して造り替える
               #関数化したい。
-        dirpath = Rails.root.to_s+"/data/#{current_user.id}/CERT/" + @csr.hostname
+        dirpath = Rails.root.to_s+"/data/#{current_user.id}/CERT/" + before_csr.hostname
         if File.exists? dirpath
           FileUtils.rm_r(Dir.glob("#{dirpath}/"), :secure => true)
+        logger.debug "ファイル削除"
         end
         ## TODO レコード条件を追加
         @ca=Ca.find_by user_id:current_user.id

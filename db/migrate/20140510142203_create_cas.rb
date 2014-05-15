@@ -11,5 +11,7 @@ class CreateCas < ActiveRecord::Migration
       t.string :dn_ou
       t.timestamps
     end
+   #一意制約
+      add_index(:cas,[:hostname,:user_id],:unique => true)   
   end
 end
