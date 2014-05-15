@@ -1,0 +1,18 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ja:
+  helpers:
+    actions: "Actions"
+    links:
+      back: "戻る"
+      cancel: "キャンセル"
+      confirm: "よろしいですか？"
+      destroy: "削除"
+      new: "作成"
+      edit: "編集"
+    titles:
+      edit: "編集 %{model}"
+      save: "保存 %{model}"
+      new: "作成 %{model}"
+      delete: "削除 %{model}"

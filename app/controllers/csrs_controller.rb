@@ -168,7 +168,7 @@ class CsrsController < ApplicationController
           ['OU', "#{@csr.dn_ou}", OpenSSL::ASN1::UTF8STRING],
                       ]
         cert.create_cert(cert_param)
-        format.html { redirect_to @csr, notice: 'Csr was successfully updated.' }
+        format.html { redirect_to @csr, notice: '証明書は再作成されました。' }
       else
         format.html { render :edit }
       end
@@ -185,7 +185,7 @@ class CsrsController < ApplicationController
       FileUtils.rm_r(Dir.glob("#{dirpath}/"), :secure => true)
     end
     respond_to do |format|
-      format.html { redirect_to csrs_url, notice: 'Csr was successfully destroyed.' }
+      format.html { redirect_to csrs_url, notice: '証明書は削除されました。' }
     end
   end
 

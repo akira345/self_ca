@@ -4,13 +4,13 @@
   <%= devise_error_messages! %>
   <%= f.hidden_field :reset_password_token %>
 
-  <div><%= f.label :password, "New password" %><br />
+  <div><%= f.label :password, "新しいパスワード" %><br />
     <%= f.password_field :password, autofocus: true, autocomplete: "off" %></div>
 
-  <div><%= f.label :password_confirmation, "Confirm new password" %><br />
+  <div><%= f.label :password_confirmation, "もう一度パスワードを入力" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
 
-  <div><%= f.submit "Change my password" %></div>
+  <div><%= f.submit "パスワードを変更しました。" %></div>
 <% end %>
 
 <%= render "users/shared/links" %>

@@ -1,5 +1,5 @@
 class Csr < ActiveRecord::Base
-  validates :hostname,:presence => true
+  validates :hostname,:presence => true,:uniqueness => true 
   validates :country,:presence=>true
   validates :dn_st,:presence=>true
   validates :dn_l,:presence=>true

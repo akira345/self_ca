@@ -18,7 +18,7 @@
         <td><%= link_to "秘密鍵DL", download_csr_path(csr,:kind =>"secret") %>
         <td><%= link_to '詳細', csr %></td>
         <td><%= link_to '編集', edit_csr_path(csr) %></td>
-        <td><%= link_to '削除', csr, method: :delete, data: { confirm: '削除しますがよい?' } %></td>
+        <td><%= link_to '削除', csr, method: :delete, data: { confirm: '削除します。よろしいですか？' } %></td>
       </tr>
     <% end %>
   </tbody>
