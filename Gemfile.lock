@@ -74,6 +74,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.3.3)
     multi_json (1.10.0)
+    mysql (2.9.1)
     orm_adapter (0.5.0)
     polyglot (0.3.4)
     pry (0.9.12.6)
@@ -157,6 +158,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
+  mysql
   pry
   pry-nav
   rails (= 4.1.0)
