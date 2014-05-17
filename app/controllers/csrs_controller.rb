@@ -17,17 +17,17 @@ class CsrsController < ApplicationController
   # GET /csrs/1
   def show
       #詳細表示
+  # before_actionでモデルを読み込み、デフォルトでshowビューが読み込まれるので、特にコードはなし。
   end
 
   # GET /csrs/1/edit
   def edit
       #編集
-    #TODO まだ未実装。IDの条件指定を調査すること。
-    #  @csr = Csr.where(:user_id=>current_user.id)
+  # before_actionでモデルを読み込み、デフォルトでeditビューが読み込まれるので、特にコードはなし。
   end
 
   def download
-    #TODO まだ未実装。IDの条件指定を調査すること。
+    #パラメタで秘密鍵、公開鍵のダウンロードを行う。
     @param=params[:kind]
     if @param == "public"
       filename = "cert_" + @csr.hostname + ".pem"
@@ -50,6 +50,7 @@ class CsrsController < ApplicationController
 
   # POST /csrs
   def create
+    #証明書作成
     @csr = Csr.new(csr_params)
     @csr.user_id = current_user.id
     respond_to do |format|
@@ -112,9 +113,9 @@ class CsrsController < ApplicationController
 
   # PATCH/PUT /csrs/1
   def update
-    #TODO 未実装
+    #証明書内容更新。旧証明書を削除し、新証明書を作りなおす。
     logger.debug "EDIT!!"
-    #変更前のホスト名を取得
+      #変更前のホスト名を取得
     before_csr = Csr.select("hostname").where(["id = ? and user_id = ?", params[:id], current_user.id]).first
     respond_to do |format|
       if @csr.update(csr_params)
@@ -125,7 +126,6 @@ class CsrsController < ApplicationController
           FileUtils.rm_r(Dir.glob("#{dirpath}/"), :secure => true)
         logger.debug "ファイル削除"
         end
-        ## TODO レコード条件を追加
         @ca=Ca.find_by user_id:current_user.id
                      #各ファイルの出力先
         ca_param=Hash.new
@@ -180,7 +180,7 @@ class CsrsController < ApplicationController
 
   # DELETE /csrs/1
   def destroy
-  #TODO レコード条件追加。CAとの整合性をどうする？ちゃんと失効処理追加する？
+      #証明書削除処理。CAとの整合性をどうする？ちゃんと失効処理追加する？
     @csr.destroy
           #今はバスっと証明書をディレクトリごと削除。シリアルがぶつかるので、CA側は消さない。
     dirpath = Rails.root.to_s+"/data/#{current_user.id}/CERT/" + @csr.hostname

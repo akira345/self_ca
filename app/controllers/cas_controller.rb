@@ -5,9 +5,10 @@ class CasController < ApplicationController
     logger.debug(current_user.id)
           #すでに認証局作成済みか？
     if Ca.exists?(user_id: current_user.id)
-          redirect_to :controller=>'csrs',:action => 'index'
+              #証明書作成画面へリダイレクト
+      redirect_to :controller=>'csrs',:action => 'index'
     else
-        #認証局作成
+          #認証局作成
       @ca=Ca.new
       render 'create'
     end

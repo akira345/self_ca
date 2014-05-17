@@ -93,8 +93,8 @@ class Makecert
     cert.extensions = [
     #基本制約の認証局フラグ
       ef.create_extension("basicConstraints","CA:TRUE", true),
-   #コメント
-      ef.create_extension("nsComment","Ruby/OpenSSL Generated Certificate"),
+   #ネットスケープ用コメント。現在は未使用？らしい。
+ #     ef.create_extension("nsComment","Ruby/OpenSSL Generated Certificate"),
    #サブジェクト鍵識別子   
       ef.create_extension("subjectKeyIdentifier", "hash"),
    #鍵用途
@@ -129,11 +129,11 @@ class Makecert
     dest = cert_config[:cert_dir] + file_name
 
     return if File.exists? dest
-Rails.logger.debug "キーペア作成"
+    Rails.logger.debug "キーペア作成"
     cert_keypair = create_key(cert_config)
-Rails.logger.debug "CSR作成"
+    Rails.logger.debug "CSR作成"
     cert_csr = create_csr(cert_config, cert_keypair)
-Rails.logger.debug "証明書作成"
+    Rails.logger.debug "証明書作成"
     sign_cert(cert_config, cert_keypair, cert_csr)
   end
 #鍵を作成
@@ -287,9 +287,9 @@ Rails.logger.debug "証明書作成"
     end
 
     cert.extensions = ex
-#####署名
+          #署名
     cert.sign ca_keypair, OpenSSL::Digest::SHA1.new
-#CA側にバックアップ
+    #CA側にバックアップ
     backup_cert_file = @ca_config[:new_certs_dir] + "/cert_#{cert.serial}.pem"
     Rails.logger.debug "Writing backup cert to #{backup_cert_file}" 
     File.open backup_cert_file, "w", 0644 do |f|
