@@ -21,10 +21,5 @@ test:
   database: db/test.sqlite3
 
 production:
-  adapter: mysql
-  encoding: utf8
-  database: self_ca
-  username: self_ca
-  password: NNVh43FZUDNu4jMd
-  host: dosmania.dip.jp
-          
+  database: db/production.sqlite3
+            
