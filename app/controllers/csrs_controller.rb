@@ -28,7 +28,7 @@ class CsrsController < ApplicationController
 
   def download
     #パラメタで秘密鍵、公開鍵のダウンロードを行う。
-    @param=params[:kind]
+    @param = params[:kind]
     if @param == "public"
       filename = "cert_" + @csr.hostname + ".pem"
     else
@@ -55,10 +55,10 @@ class CsrsController < ApplicationController
     @csr.user_id = current_user.id
     respond_to do |format|
       if @csr.save
-        @ca=Ca.find_by user_id:current_user.id
+        @ca = Ca.find_by user_id:current_user.id
         logger.debug("-----------------------")
                       #各ファイルの出力先
-        ca_param=Hash.new
+        ca_param = Hash.new
         cert_param = Hash.new
         ca_param = Utils::generate_ca_param(@ca)
         cert_param = Utils::generate_cert_param(@csr)
@@ -83,21 +83,19 @@ class CsrsController < ApplicationController
     respond_to do |format|
       if @csr.update(csr_params)
               #一旦削除して造り替える
-              #関数化したい。
         dirpath = Rails.root.to_s+"/data/#{current_user.id}/CERT/" + before_csr.hostname
-        if File.exists? dirpath
-          FileUtils.rm_r(Dir.glob("#{dirpath}/"), :secure => true)
-        logger.debug "ファイル削除"
-        end
-        @ca=Ca.find_by user_id:current_user.id
+
+        Utils::delete_file(dirparh)
+
+        @ca = Ca.find_by user_id:current_user.id
                      #各ファイルの出力先
-        ca_param=Hash.new
+        ca_param = Hash.new
         cert_param = Hash.new
        
         ca_param = Utils::generate_ca_param(@ca)
-        cert = Makecert.new(ca_param)
         cert_param = Utils::generate_cert_param(@csr)
 
+        cert = Makecert.new(ca_param)
         cert.create_cert(cert_param)
         format.html { redirect_to @csr, notice: '証明書は再作成されました。' }
       else
@@ -112,9 +110,9 @@ class CsrsController < ApplicationController
     @csr.destroy
           #今はバスっと証明書をディレクトリごと削除。シリアルがぶつかるので、CA側は消さない。
     dirpath = Rails.root.to_s+"/data/#{current_user.id}/CERT/" + @csr.hostname
-    if File.exists? dirpath
-      FileUtils.rm_r(Dir.glob("#{dirpath}/"), :secure => true)
-    end
+
+    Utils::delete_file(dirparh)
+
     respond_to do |format|
       format.html { redirect_to csrs_url, notice: '証明書は削除されました。' }
     end

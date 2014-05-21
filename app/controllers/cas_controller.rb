@@ -9,7 +9,7 @@ class CasController < ApplicationController
       redirect_to :controller=>'csrs',:action => 'index'
     else
           #認証局作成
-      @ca=Ca.new
+      @ca = Ca.new
       render 'create'
     end
   end
@@ -32,7 +32,6 @@ class CasController < ApplicationController
   def create
     logger.debug ("Begin")
     pass_size = 16
-    logger.debug("Begin")
     @ca = Ca.new(ca_params)
     @ca.ca_password=Utils::generate_password(pass_size)
     @ca.user_id = current_user.id
@@ -40,7 +39,7 @@ class CasController < ApplicationController
       logger.debug("OK")
       logger.debug(@ca.country)
                 #各ファイルの出力先
-      ca_param=Hash.new
+      ca_param = Hash.new
       ca_param = Utils::generate_ca_param(@ca)
       ca = Makecert.new(ca_param)
       logger.debug("ca")
