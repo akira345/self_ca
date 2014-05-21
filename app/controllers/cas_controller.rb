@@ -32,46 +32,16 @@ class CasController < ApplicationController
   def create
     logger.debug ("Begin")
     pass_size = 16
-           #パスワード生成
-    tmp =[]
-    tmp = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
-    password = Array.new(pass_size){tmp[rand(tmp.size)]}.join
-
     logger.debug("Begin")
     @ca = Ca.new(ca_params)
-    @ca.ca_password=password
+    @ca.ca_password=Utils::generate_password(pass_size)
     @ca.user_id = current_user.id
     if @ca.save
       logger.debug("OK")
       logger.debug(@ca.country)
                 #各ファイルの出力先
       ca_param=Hash.new
-      #CAファイルの出力先
-      ca_param[:CA_dir] = Rails.root.to_s+"/data/#{current_user.id}/CA/"
-      ca_param[:keypair_file] = File.join ca_param[:CA_dir], "private/cakeypair.pem"
-      ca_param[:cert_file] = File.join ca_param[:CA_dir], "cacert.pem"
-      ca_param[:serial_file] = File.join ca_param[:CA_dir], "serial"
-      ca_param[:new_certs_dir] = File.join ca_param[:CA_dir], "newcerts"
-      #CAの有効期限
-      ca_param[:ca_cert_days] = 5 * 365 # five years
-      #CAの鍵長
-      ca_param[:ca_rsa_key_length] = 2048
-                #発行する証明書の有効期限と鍵の長さ
-      ca_param[:cert_days] = 365 # one year
-      ca_param[:cert_key_length_min] = 1024
-      ca_param[:cert_key_length_max] = 2048
-      #CAのDN
-      ca_param[:name] = [
-        ['C', "#{@ca.country}", OpenSSL::ASN1::PRINTABLESTRING],
-        ['ST',"#{@ca.dn_st}",OpenSSL::ASN1::UTF8STRING],
-        ['L',"#{@ca.dn_l}",OpenSSL::ASN1::UTF8STRING],
-        ['O', "#{@ca.dn_o}", OpenSSL::ASN1::UTF8STRING],
-        ['OU', "#{@ca.dn_ou}", OpenSSL::ASN1::UTF8STRING],
-                ]
-      #CAのホスト名情報
-      ca_param[:hostname] = @ca.hostname
-      #CAのパスワード
-      ca_param[:password] = @ca.ca_password
+      ca_param = Utils::generate_ca_param(@ca)
       ca = Makecert.new(ca_param)
       logger.debug("ca")
   
