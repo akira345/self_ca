@@ -85,7 +85,7 @@ class CsrsController < ApplicationController
               #一旦削除して造り替える
         dirpath = Rails.root.to_s+"/data/#{current_user.id}/CERT/" + before_csr.hostname
 
-        Utils::delete_file(dirparh)
+        Utils::delete_file(dirpath)
 
         @ca = Ca.find_by user_id:current_user.id
                      #各ファイルの出力先
@@ -111,7 +111,7 @@ class CsrsController < ApplicationController
           #今はバスっと証明書をディレクトリごと削除。シリアルがぶつかるので、CA側は消さない。
     dirpath = Rails.root.to_s+"/data/#{current_user.id}/CERT/" + @csr.hostname
 
-    Utils::delete_file(dirparh)
+    Utils::delete_file(dirpath)
 
     respond_to do |format|
       format.html { redirect_to csrs_url, notice: '証明書は削除されました。' }

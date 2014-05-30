@@ -1,10 +1,10 @@
 class Utils
   def initialize
   end
-  def dele_file(dirpath)
+  def self.dele_file(dirpath)
     if File.exists? dirpath
       FileUtils.rm_r(Dir.glob("#{dirpath}/"), :secure => true)
-      logger.debug "ファイル削除"
+      Rails.logger.debug "ファイル削除"
     end
   end
   def self.generate_password(size)
