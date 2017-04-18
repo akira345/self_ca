@@ -104,7 +104,7 @@ class Makecert
     cert.add_extension ef.create_extension("authorityKeyIdentifier",
                                            "keyid:always,issuer:always")
 #署名
-    cert.sign keypair, OpenSSL::Digest::SHA1.new
+    cert.sign keypair, OpenSSL::Digest::SHA256.new
 
     cb = proc do @ca_config[:password] end
 #キーペアをエクスポート
@@ -192,7 +192,7 @@ class Makecert
     req.version = 0
     req.subject = name
     req.public_key = keypair.public_key
-    req.sign keypair, OpenSSL::Digest::SHA1.new
+    req.sign keypair, OpenSSL::Digest::SHA256.new
 
     Rails.logger.debug "Writing CSR to #{csr_file}" 
     File.open csr_file, "w" do |f|
@@ -288,7 +288,7 @@ class Makecert
 
     cert.extensions = ex
           #署名
-    cert.sign ca_keypair, OpenSSL::Digest::SHA1.new
+    cert.sign ca_keypair, OpenSSL::Digest::SHA256.new
     #CA側にバックアップ
     backup_cert_file = @ca_config[:new_certs_dir] + "/cert_#{cert.serial}.pem"
     Rails.logger.debug "Writing backup cert to #{backup_cert_file}" 
