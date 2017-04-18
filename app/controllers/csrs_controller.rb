@@ -31,8 +31,10 @@ class CsrsController < ApplicationController
     @param = params[:kind]
     if @param == "public"
       filename = "cert_" + @csr.hostname + ".pem"
+      download_filename = @csr.hostname + ".crt"
     else
       filename = @csr.hostname + "_keypair.pem"
+      download_filename = @csr.hostname + ".key"
     end
     filepath = Rails.root.to_s+"/data/#{current_user.id}/CERT/#{@csr.hostname}/#{filename}"
     if File.exists? filepath
@@ -40,7 +42,7 @@ class CsrsController < ApplicationController
       stat = File::stat(filepath)
       logger.debug(stat.size)
       #binding.pry
-      send_file(filepath, :filename => filename,:length => stat.size,:status=>201,:type=>'application/x-pem-file')
+      send_file(filepath, :filename => download_filename,:length => stat.size,:status=>201,:type=>'application/x-pem-file')
     else
       logger.debug("ファイルなし")
     end

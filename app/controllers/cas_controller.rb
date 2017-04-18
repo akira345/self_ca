@@ -20,7 +20,7 @@ class CasController < ApplicationController
       logger.debug("ファイルあり")
       stat = File::stat(filepath)
       logger.debug(stat.size)
-      send_file(filepath, :filename => 'cacertt.pem',:length => stat.size,:status=>201,:type=>'application/x-pem-file')
+      send_file(filepath, :filename => 'cacert.ca',:length => stat.size,:status=>201,:type=>'application/x-pem-file')
       #send_file(filepath)
     else
       logger.debug("ファイルなし")
