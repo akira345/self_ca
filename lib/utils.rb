@@ -1,7 +1,7 @@
 class Utils
   def initialize
   end
-  def self.dele_file(dirpath)
+  def self.delete_file(dirpath)
     if File.exists? dirpath
       FileUtils.rm_r(Dir.glob("#{dirpath}/"), :secure => true)
       Rails.logger.debug "ファイル削除"
