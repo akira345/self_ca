@@ -1,4 +1,4 @@
-class CreateCas < ActiveRecord::Migration
+class CreateCas < ActiveRecord::Migration[4.2]
   def change
     create_table :cas do |t|
       t.integer :user_id 

@@ -1,4 +1,4 @@
-class CreateCsrs < ActiveRecord::Migration
+class CreateCsrs <  ActiveRecord::Migration[4.2]
   def change
     create_table :csrs do |t|
       t.integer :user_id
