@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.0'
+gem 'rails', '5.1.5'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -45,7 +45,7 @@ gem 'devise'
 #gem 'i18n_generators'
 
 # Use Twitter-bootstrap
-gem 'less-rails'
+gem 'less-rails', '~> 3.0.0'
 gem 'twitter-bootstrap-rails'
 gem 'execjs'
 
@@ -55,7 +55,7 @@ gem 'simple_form'
 gem 'country_select'
 gem 'pry'
 gem 'pry-nav'
-gem 'mysql'
+#gem 'mysql'
 gem 'tilt'
 gem 'web-console', '~> 2.0', group: [:development]
 gem 'responders', '~> 2.0'
