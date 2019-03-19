@@ -59,7 +59,7 @@ gem 'pry'
 gem 'pry-nav'
 #gem 'mysql'
 gem 'tilt'
-gem 'web-console', '~> 2.0', group: [:development]
+gem 'web-console', '~> 3.0', group: [:development]
 gem 'responders', '~> 2.0'
 gem 'listen', '~> 3.1.5'
 
