@@ -2,10 +2,11 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.1'
+gem 'rails', '5.2.2'
+gem 'actionpack', '5.2.2'
 gem "bootsnap", ">= 1.1.0", require: false
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', "~> 1.3.6"
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -61,3 +62,4 @@ gem 'tilt'
 gem 'web-console', '~> 2.0', group: [:development]
 gem 'responders', '~> 2.0'
 gem 'listen', '~> 3.1.5'
+
