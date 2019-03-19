@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.2'
-gem 'actionpack', '5.2.2'
+gem 'rails', '5.2.2.1'
+gem 'actionpack', '5.2.2.1'
 gem "bootsnap", ">= 1.1.0", require: false
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', "~> 1.3.6"
