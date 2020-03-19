@@ -4,7 +4,7 @@ ruby '2.7.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '6.0.2.1'
-gem 'actionpack', '6.0.2.1'
+gem 'actionpack', '6.0.2.2'
 gem "bootsnap", ">= 1.1.0", require: false
 # Use sqlite3 as the database for Active Record
 group :production do
