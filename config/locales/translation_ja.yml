@@ -1,9 +1,20 @@
 ja:
   activerecord:
     models:
+      user: ユーザー
       ca: 認証局データ
       csr: 証明書データ
+
     attributes:
+      user:
+        email: Eメール
+        encrypted_password: 暗号化されたパスワード
+        remember_created_at: 次から入力を省略した日時
+        reset_password_sent_at: パスワードリセットを送信した日時
+        reset_password_token: パスワードトークンをリセット
+        ca: :activerecord.models.ca #g
+        csrs: CSR #g
+
       ca:
         ca_password: CAのパスワード
         country: 国コード
@@ -12,11 +23,13 @@ ja:
         dn_ou: 部署名
         dn_st: 都道府県
         hostname: ホスト名
+        user: ユーザID
+
       csr:
-        hostname: ホスト名
         country: 国コード
         dn_l: 市区郡
         dn_o: 組織名
         dn_ou: 部署名
         dn_st: 都道府県
-        
+        hostname: ホスト名
+        user: ユーザID

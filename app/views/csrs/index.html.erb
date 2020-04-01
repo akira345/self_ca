@@ -19,8 +19,8 @@
         <td><%= csr.updated_at.strftime("%Y/%m/%d") %></td>
         <td><%= (csr.updated_at + 1.years).strftime("%Y/%m/%d") %></td>
         
-        <td><%= link_to "公開鍵DL", download_csr_path(csr,:kind =>"public") %>
-        <td><%= link_to "秘密鍵DL", download_csr_path(csr,:kind =>"secret") %>
+        <td><%= link_to "公開鍵DL", download_csr_path(csr, kind: 'public'), data: { turbolinks: false } %>
+        <td><%= link_to "秘密鍵DL", download_csr_path(csr, kind: 'secret'), data: { turbolinks: false } %>
         <td><%= link_to '詳細', csr %></td>
         <td><%= link_to '編集', edit_csr_path(csr) %></td>
         <td><%= link_to '削除', csr, method: :delete, data: { confirm: '削除します。よろしいですか？' } %></td>

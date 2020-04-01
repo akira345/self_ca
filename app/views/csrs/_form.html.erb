@@ -3,7 +3,8 @@
 
   <div class="form-inputs">
     <%= f.input :hostname %>
-    <%= f.input :country, iso_codes: true ,:collection => [['Japan', :JP]],:selected => [:JP]%>
+<!--    <%= f.input :country, iso_codes: true ,:collection => [['Japan', :JP]],:selected => [:JP]%> -->
+    <%= f.input :country, iso_codes: true, selected: [:JP] %>
     <%= f.input :dn_st %>
     <%= f.input :dn_l %>
     <%= f.input :dn_o %>

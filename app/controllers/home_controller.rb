@@ -1,9 +1,6 @@
 class HomeController < ApplicationController
   def index
-#useridがなければTOPへリダイレクト
-    if current_user  
-      redirect_to :user_root  
-      return  
-    end  
+  # useridがなければTOPへリダイレクト
+    redirect_to :user_root if current_user
   end
 end
