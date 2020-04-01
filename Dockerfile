@@ -10,10 +10,13 @@ RUN apt-get update \
 WORKDIR /usr/src/app
 COPY Gemfile* ./
 
-RUN bundle install && gem install execjs
+RUN bundle install
 
 COPY . .
-RUN bundle exec rake assets:precompile
+#RUN bundle exec rake assets:precompile
+#RUN rails webpacker:install
 
 EXPOSE 3000
+# 初回インストール時はこれを有効化して、手動でrails webpacker:installする。
+#CMD ["tail", "-f", "/dev/null"]
 CMD ["rails", "server", "-b", "0.0.0.0"]

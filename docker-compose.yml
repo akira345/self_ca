@@ -1,12 +1,17 @@
 version: "3"
+volumes:
+  cache:
+    driver: local
 services:
   rails:
     build: .
     volumes:
       - ./:/usr/src/app
+      - cache:/cache
     environment:
       TZ: "Asia/Tokyo"
-      RAILS_ENV: 'development'
-      RACK_ENV: 'development'
+      RAILS_ENV: "development"
+      RACK_ENV: "development"
+      SPROCKETS_CACHE: /cache
     ports:
       - "3000:3000"
