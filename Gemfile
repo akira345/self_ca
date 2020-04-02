@@ -61,10 +61,10 @@ gem 'devise'
 gem 'i18n_generators'
 
 # Use Twitter-bootstrap
-gem 'execjs'
-gem 'less-rails' # Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem 'therubyracer'
-gem 'twitter-bootstrap-rails'
+#gem 'execjs'
+#gem 'less-rails' # Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+#gem 'therubyracer'
+#gem 'twitter-bootstrap-rails'
 
 # Use simple_form
 gem 'simple_form'

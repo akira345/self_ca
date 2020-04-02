@@ -7,9 +7,8 @@
     <title><%= content_for?(:title) ? yield(:title) : "SelfCa" %></title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag "application", :media => "all" %>
-
-    <%= javascript_pack_tag "application" %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -17,32 +16,37 @@
     <![endif]-->
   </head>
   <body>
-
-    <div class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">SelfCa</a>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
-            <% if user_signed_in? %>
-              <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
-              <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
-            <% filepath = Rails.root.to_s+"/data/#{current_user.id}/CA/cacert.pem"
-               if File.exist? filepath %>
-            <li><%= link_to "CA証明書DL", cas_download_path, data: { turbolinks: false }  %></li>
-            <% end %>
-            <% else %>
-              <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
-              <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
-            <% end %>
-          </ul>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">SelfCa</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'Edit profile', edit_user_registration_path, :class => 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link' %>
+          </li>
+          <% filepath = Rails.root.to_s + "/data/#{current_user.id}/CA/cacert.pem" %>
+          <% if File.exist? filepath %>
+          <li class="nav-item">
+            <%= link_to "CA証明書DL", cas_download_path, data: { turbolinks: false }, :class => 'nav-link' %>
+          </li>
+          <% end %>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Sign up", new_user_registration_path, :class => 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, :class => 'nav-link' %>
+          </li>
+        <% end %>
+        </ul>
       </div>
-    </div>
+    </nav>
 
     <div class="container">
       <div class="row">
@@ -54,7 +58,7 @@
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Akira345 2014-2019</p>
+        <p>&copy; Akira345 2014-2020</p>
       </footer>
 
     </div> <!-- /container -->

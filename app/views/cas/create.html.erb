@@ -7,19 +7,15 @@
 <%= simple_form_for @ca do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :hostname %>
-<!--    <%= f.input :country, iso_codes: true ,:collection => [['Japan', :JP]],:selected => [:JP]%> -->
-    <%= f.input :country, iso_codes: true, selected: [:JP] %>
-    <%= f.input :dn_st %>
-    <%= f.input :dn_l %>
-    <%= f.input :dn_o %>
-    <%= f.input :dn_ou %>
-  </div>
+    <%= f.input :hostname, class: 'form-control' %>
+    <%= f.input :country, iso_codes: true, selected: [:JP], class: 'form-control'  %>
+    <%= f.input :dn_st, class: 'form-control'  %>
+    <%= f.input :dn_l, class: 'form-control'  %>
+    <%= f.input :dn_o, class: 'form-control'  %>
+    <%= f.input :dn_ou, class: 'form-control'  %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+    <%= f.button :submit, class: 'btn btn-success' %>
+
 <% end %>
 
 
