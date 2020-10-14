@@ -11,6 +11,6 @@ class CreateCsrs < ActiveRecord::Migration[6.0]
       t.timestamps
     end
     #一意制約
-    add_index(:csrs, %i[:hostname, :user_id], unique: true)
+    add_index :csrs, [:hostname, :user_id], unique: true
   end
 end

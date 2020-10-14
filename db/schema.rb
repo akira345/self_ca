@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2014_05_11_061100) do
     t.string "dn_ou"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\":hostname,\", \":user_id\"", name: "index_cas_on_:hostname,_and_:user_id", unique: true
+    t.index ["hostname", "user_id"], name: "index_cas_on_hostname_and_user_id", unique: true
     t.index ["user_id"], name: "index_cas_on_user_id"
   end
 
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2014_05_11_061100) do
     t.string "dn_ou"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\":hostname,\", \":user_id\"", name: "index_csrs_on_:hostname,_and_:user_id", unique: true
+    t.index ["hostname", "user_id"], name: "index_csrs_on_hostname_and_user_id", unique: true
     t.index ["user_id"], name: "index_csrs_on_user_id"
   end
 

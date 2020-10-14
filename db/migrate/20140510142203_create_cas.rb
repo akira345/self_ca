@@ -12,6 +12,6 @@ class CreateCas < ActiveRecord::Migration[6.0]
       t.timestamps
     end
     #一意制約
-    add_index(:cas, %i[:hostname, :user_id], unique: true)
+    add_index :cas, [:hostname, :user_id], unique: true
   end
 end
