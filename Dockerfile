@@ -11,6 +11,7 @@ WORKDIR /usr/src/app
 COPY Gemfile* ./
 
 RUN bundle install
+RUN yarn install
 
 COPY . .
 #RUN bundle exec rake assets:precompile
