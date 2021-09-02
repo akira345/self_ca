@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2014_05_11_061100) do
 
   create_table "cas", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "ca_password", limit: 16, null: false
     t.string "hostname", null: false
     t.string "country", null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2014_05_11_061100) do
   end
 
   create_table "csrs", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "hostname", null: false
     t.string "country", null: false
     t.string "dn_st", null: false
