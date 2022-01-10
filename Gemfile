@@ -83,6 +83,6 @@ gem 'simple_form'
 
 gem 'country_select'
 
-gem 'bootstrap', '~> 5.0.0'
+gem 'bootstrap', '~> 5.1.0'
 
 gem 'webpacker', '~> 5.0'
