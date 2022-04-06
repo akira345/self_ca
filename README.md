@@ -5,7 +5,7 @@ Railsで作成した自己認証局による自己証明書を自動生成する
 
 まだベータ版でバグがあるかもしれません。
 
-* Ruby version:3.1.0
+* Ruby version:3.1.1
 
-* Rails version:6.1.1 以上
+* Rails version:7.0.2.3 以上
 
