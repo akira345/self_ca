@@ -114,7 +114,7 @@ GEM
     i18n_generators (2.2.2)
       activerecord (>= 3.0.0)
       railties (>= 3.0.0)
-    importmap-rails (1.1.5)
+    importmap-rails (1.1.6)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.6.0)
@@ -150,7 +150,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.14.3-x86_64-linux)
+    nokogiri (1.14.5-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pg (1.4.6)
@@ -159,7 +159,7 @@ GEM
     puma (6.2.0)
       nio4r (~> 2.0)
     racc (1.6.2)
-    rack (2.2.6.4)
+    rack (2.2.7)
     rack-proxy (0.7.6)
       rack
     rack-test (2.1.0)
@@ -228,7 +228,7 @@ GEM
     sqlite3 (1.6.2-x86_64-linux)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
-    thor (1.2.1)
+    thor (1.2.2)
     tilt (2.1.0)
     timeout (0.3.2)
     turbo-rails (1.4.0)
@@ -260,7 +260,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.7)
+    zeitwerk (2.6.8)
 
 PLATFORMS
   x86_64-linux
