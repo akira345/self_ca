@@ -5,7 +5,7 @@
     "@popperjs/core": "2.11.8",
     "@rails/actioncable": "7.0.4",
     "@rails/activestorage": "7.0.6",
-    "@rails/ujs": "7.0.4",
+    "@rails/ujs": "7.0.6",
     "@rails/webpacker": "5.4.4",
     "bootstrap": "5.2.3",
     "jquery": "3.7.0",
