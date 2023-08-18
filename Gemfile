@@ -16,7 +16,7 @@ group :development, :test do
   gem 'sqlite3', '~> 1.4'
 end
 # Use Puma as the app server
-gem 'puma', '~> 6.0'
+gem 'puma', '~> 6.3'
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
 
