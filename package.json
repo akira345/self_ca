@@ -8,7 +8,7 @@
     "@rails/ujs": "7.0.6",
     "@rails/webpacker": "5.4.4",
     "bootstrap": "5.3.1",
-    "jquery": "3.7.0",
+    "jquery": "3.7.1",
     "turbolinks": "5.2.0",
     "webpack": "5.88.2",
     "webpack-cli": "5.1.4"
